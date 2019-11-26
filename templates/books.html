@@ -1,0 +1,17 @@
+
+{% extends "layout.html" %}
+
+  {% block body %}
+
+      <form action="/search" method="POST">
+         <div class="form-row">
+            <div class="col-sm-9 col-md-4">
+              <input type="search" class="form-control" name="search" placeholder="Title, Author or ISBN">
+            </div>
+        </div>
+        <button class="btn btn-primary"> Search </button>
+
+    {% endblock %}
+
+
+</html>

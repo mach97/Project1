@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+  {% block body %}
+
+      <form action="/search" method="POST">
+         <div class="form-row">
+            <div class="col-sm-9 col-md-4">
+              <input type="search" class="form-control" name="search" placeholder="Title, Author or ISBN">
+            </div>
+        </div>
+        <button class="btn btn-primary"> Search </button>
+
+  <h1>Busqueda</h1>
+{% if books is defined and books|length > 0 %}
+
+		<table class="result">
+			<tr class="header">
+				<td class="grow-20">ISBN</td>
+				<td class="grow-35">Title</td>
+				<td class="grow-35">Author</td>
+				<td>Action</td>
+			</tr>
+			{% for book in books %}
+				<tr class="book">
+					<td class="grow-20">{{ book.isbn }}</td>
+					<td class="grow-35">{{ book.title }}</td>
+					<td class="grow-35">{{ book.author }}</td>
+					<td><a href="{{ url_for('details', isbn=book.isbn) }}">Details</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<p>No matches found</p>
+{% endif %}
+
+{% endblock %}

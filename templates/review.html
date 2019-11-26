@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Review
+{% endblock %}
+
+{% block body %}
+
+	<h1>{{title}}</h1>
+	<form class="form" action="{{ url_for('review', isbn=isbn) }}" method="POST">
+		<label for="review">Review</label>
+		<textarea name="review" id="review" placeholder="Write your review here"></textarea>
+		<label for="score">Score</label>
+		<input type="decimal" min="0" max="5" name="score" id="score">
+		<input type="submit" value="Submit">
+	</form>
+
+	<ul class="reviews">
+		{% if reviews is defined  and reviews %}
+			<h3>What people are talking about this book: </h3>
+			{% for review in reviews %}
+				<li><span>User {{review.username}} said:</span>{{review.comment}}</li>
+			{% endfor %}
+		{% else %}
+			<h3>Be the first one to leave a review in this book</h3>
+		{% endif %}
+	</ul>
+
+	<p><a href="{{ url_for('details', isbn=isbn) }}">Return to details</a></p>
+{% endblock %}
